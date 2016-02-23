@@ -452,7 +452,7 @@ function dataprep(err, worlddata, animaldata, countrytranslationdata) {
 	vis.points.init();
 
 
-	// vis.stats.initContainer();
+	vis.stats.initContainer(); // switched this on (changed)
 
 } // data and prep
 
@@ -1209,6 +1209,17 @@ vis.stats = (function(){
 			d3.select('div#statistics').transition().duration(time).style('opacity', 0);
 			d3.select('div#statistics').transition().delay(time).remove();
 
+
+			//  set all this to 0 upon close for a fresh slate (changed)
+			g.statsRefresh = true;
+
+			g.flagpointsPerCountry = {};
+			g.animalpointsPerArea = {};
+
+			g.totalSearchtime = 0;
+			g.totalpoints = 0;
+
+
 		}); // close the statistics modal needs to be inside the scope the elements got created in
 		
 		my.initGraph('flags'); // initiate the graph
@@ -1218,7 +1229,20 @@ vis.stats = (function(){
 	
 	my.initGraph = function(graphId){
 		
-		
+		/* set flagpoints and animalpoints per area (changed */
+
+		if(g.statsRefresh != true) {
+
+			g.flagpointsPerCountry = JSON.parse('{"JPN":{"points":320,"time":7.2,"area":0.27},"JAM":{"points":20984,"time":2.66,"area":0.01},"NPL":{"points":1336,"time":3.82,"area":0.1},"NGA":{"points":165,"time":5.84,"area":0.62},"PRI":{"points":31562,"time":2.21,"area":0.01},"SWE":{"points":608,"time":2.49,"area":0.3},"BEN":{"points":824,"time":10.87,"area":0.08},"PAK":{"points":336,"time":2.23,"area":0.59},"ECU":{"points":762,"time":4.1,"area":0.17}}');
+
+			g.animalpointsPerArea = JSON.parse('{"antelope":{"points":257,"time":3.39,"area":11.59},"ostrich":{"points":410,"time":1.91,"area":10.88},"belugawhale":{"points":80,"time":5.57,"area":26.46},"hippo":{"points":334,"time":1.5,"area":15.79},"giraffeweevil":{"points":7793,"time":3.16,"area":0.4},"tasmaniandevil":{"points":964,"time":1.6,"area":5.23},"grapevinesnail":{"points":1125,"time":2.64,"area":3.15},"bee":{"points":62,"time":1.32,"area":92.45},"cow":{"points":64,"time":1.27,"area":92.45}}');
+
+			g.totalpoints = 56897 + 11089;
+
+			g.totalSearchtime = 41.42 + 22.36;
+
+		} // only fill the stats board at the very beginning. g.statsRefresh is set to true as soon as the close button of the stats-board is hit 
+
 		/* data and prep */ 
 
 		data[graphId] = []; // data prep
