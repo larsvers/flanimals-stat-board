@@ -1146,8 +1146,8 @@ vis.stats = (function(){
 		var statsInitHTML =
 			'<div id="statsContainer">\
 				<nav id="statsNav">\
-					<button class="statsBtn" id="time">Zeit</button>\
-					<button class="statsBtn" id="points">Punkte</button>\
+					<button class="statsBtn" id="time">Time</button>\
+					<button class="statsBtn" id="points">Points</button>\
 					<div class="totalStats" id="total"></div>\
 					<img class="statsBtn" id="close" src="images/other/close.png" alt="close"></img>\
 				</nav>\
